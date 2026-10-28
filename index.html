@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Fatal Tools · Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<script type="module" src="main.js"></script>
+</head>
+<body class="view-mobile role-client">
+
+<div class="mode-switch" role="group" aria-label="Controles da demo">
+  <button data-role="client" aria-pressed="true">👤 Cliente</button>
+  <button data-role="companion" aria-pressed="false">💼 Acompanhante</button>
+  <span class="divider" aria-hidden="true"></span>
+  <button data-mode="mobile" aria-pressed="true">📱 Mobile</button>
+  <button data-mode="desktop" aria-pressed="false">🖥️ Desktop</button>
+  <span class="divider" aria-hidden="true"></span>
+  <button class="reset-btn" data-reset-demo aria-label="Reiniciar demo">↺</button>
+</div>
+
+<div class="stage">
+  <div class="device" id="device">
+    <div class="viewport client-only" id="client-viewport">
+
+      <header class="site-header">
+        <button class="icon-btn only-mobile" aria-label="Menu" data-toast="Menu do site atual">☰</button>
+        <a class="logo" href="#" aria-label="Fatal Model">
+          <svg viewBox="0 0 52 36" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 18 C18 10 10 2 5 3 C1 4 2 10 9 16 L12 19 C9 25 7 32 11 33 C15 34 20 27 26 19 C32 11 40 2 46 2 C51 3 51 9 44 16 L40 19 C43 25 45 32 41 33 C37 34 32 27 26 19"/>
+          </svg>
+          <b>fatal</b><span>model</span>
+        </a>
+        <div class="header-actions">
+          <a class="header-link signup only-desktop" href="#">CADASTRE-SE GRÁTIS ›</a>
+          <a class="header-link only-desktop" href="#">LOGIN ›</a>
+          <span class="flag">🇧🇷<small>⌄</small></span>
+          <button class="icon-btn only-desktop" data-open-cart aria-label="Abrir kit">🛍️<span class="counter" data-cart-count hidden>0</span></button>
+          <span class="icon-btn" aria-hidden="true">🔔<span class="counter">5</span></span>
+        </div>
+      </header>
+
+      <main class="profile">
+        <div class="profile-cover">
+          <div class="cover-actions">
+            <button class="cover-btn" aria-label="Voltar">←<span class="label">Voltar</span></button>
+            <span class="spacer"></span>
+            <button class="cover-btn boost" aria-label="Impulsionar perfil">🚀<span class="label">Impulsionar perfil</span></button>
+            <button class="cover-btn" aria-label="Seguir">♡<span class="label">Seguir</span></button>
+            <button class="cover-btn report" aria-label="Denunciar">⚑<span class="label">Denunciar</span></button>
+            <button class="cover-btn" aria-label="Mais opções">⋮</button>
+          </div>
+        </div>
+
+        <div class="profile-body">
+          <div class="identity-row">
+            <div class="identity">
+              <div class="avatar" aria-hidden="true"></div>
+              <span class="bubble">Agende já e se surpreenda!!!</span>
+              <div class="identity-text">
+                <h1 class="profile-name">Luna Martins <span class="verified-mark" title="Selo de influência">✪</span></h1>
+                <div class="profile-meta">Mulher ⓘ <span class="dot"></span> 27 anos <span class="dot"></span> 👤 3,2k</div>
+                <span class="verified-tag">Documentos verificados ⓘ</span>
+              </div>
+            </div>
+            <div>
+              <div class="reviews-box">
+                <div class="reviews-head">Avaliações recentes <span class="score">★ 4.9 <u>(+87)</u></span></div>
+                <div class="review-chips" id="review-chips"></div>
+              </div>
+              <a class="telegram" href="#">✈︎ Novidades no Telegram</a>
+            </div>
+          </div>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="head"><span>💲</span> Valores <span class="chev">⌄</span></div>
+              <div class="price-label">a partir de</div>
+              <div class="value">R$ 800 <small>(1 hora)</small></div>
+              <div>atende homens e casais</div>
+            </div>
+            <div class="info-card">
+              <div class="head"><span>➤</span> <span>Localização<small>(saiba mais)</small></span> <span class="chev">⌄</span></div>
+              <div class="value">Moema</div>
+              <div>São Paulo - SP</div>
+              <div class="location-note">com local</div>
+            </div>
+          </div>
+
+          <div class="voice">
+            <span class="play">▶</span> Ouça minha voz <span class="wave"></span> 0:18 <span class="voice-more">⋮</span>
+          </div>
+
+          <div class="cta-row">
+            <button class="cta fans"><span class="fans-logo">♥</span> Ver <b>FatalFans</b></button>
+            <button class="cta shop" data-goto-shop>🛍️ Loja da Luna <span class="new-pill">NOVO</span></button>
+            <button class="cta whats only-desktop">◎ Chamar no WhatsApp</button>
+          </div>
+        </div>
+
+        <div id="tabs-anchor"></div>
+        <nav class="profile-tabs" role="tablist" id="profile-tabs"></nav>
+
+        <section class="tab-panel" data-panel="photos">
+          <h2 class="panel-title">📷 Galeria de fotos e vídeos <span class="end">↗</span></h2>
+          <div class="gallery" id="gallery"></div>
+        </section>
+
+        <section class="tab-panel" data-panel="about" hidden>
+          <div class="gray-card"><h3>Descrição</h3><p>Oi, sou a Luna! Atendo no meu local em Moema, com discrição e muito carinho. Na minha loja você encontra tudo o que eu uso nos encontros, novinho e lacrado. 💕</p></div>
+          <div class="gray-card"><h3>Características físicas <span>→</span></h3>
+            <div class="pills"><span class="pill">58kg</span><span class="pill">1.68 m</span><span class="pill">Cabelo: Castanho</span><span class="pill">Olhos: Castanhos</span><span class="more">(+ 6)</span></div></div>
+          <div class="gray-card"><h3>Horário de Expediente</h3><p>Quarta-feira <b>Hoje</b> · 10:00 - 22:00</p></div>
+        </section>
+
+        <section class="tab-panel" data-panel="shop" hidden>
+          <div class="gray-card shop-intro">
+            <div class="avatar-sm" aria-hidden="true"></div>
+            <p><b>Loja da Luna</b><br>Produtos que eu mesma escolho e levo <b>lacrados</b> no dia do nosso encontro. Você paga aqui, com segurança.</p>
+          </div>
+          <div class="pills" id="shop-filters"></div>
+          <div class="shop-grid" id="shop-grid"></div>
+          <div class="shop-trust">
+            <div>🔒 Produtos novos e lacrados, com registro na ANVISA quando exigido.</div>
+            <div>🧾 Nome neutro na fatura do cartão e no Pix.</div>
+            <div>⚖️ Aqui você paga só os produtos. O atendimento é combinado direto com ela.</div>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="reviews" hidden>
+          <h2 class="panel-title">Avaliações de Luna Martins</h2>
+          <div id="review-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="viewport companion-only" id="companion-viewport">
+      <header class="site-header">
+        <button class="icon-btn" id="menu-toggle" data-open-menu aria-label="Abrir menu">☰</button>
+        <a class="logo" href="#" aria-label="Fatal Model">
+          <svg viewBox="0 0 52 36" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 18 C18 10 10 2 5 3 C1 4 2 10 9 16 L12 19 C9 25 7 32 11 33 C15 34 20 27 26 19 C32 11 40 2 46 2 C51 3 51 9 44 16 L40 19 C43 25 45 32 41 33 C37 34 32 27 26 19"/>
+          </svg>
+          <b>fatal</b><span>model</span>
+        </a>
+        <div class="header-actions">
+          <span class="icon-btn" aria-hidden="true">🔔<span class="counter">2</span></span>
+        </div>
+      </header>
+      <main class="companion-page" id="companion-main"></main>
+    </div>
+
+    <div class="sticky-bar only-mobile client-only">
+      <div class="sticky-price">a partir de<b>R$ 800</b>(1 hora)</div>
+      <button class="sticky-kit" data-open-cart aria-label="Abrir kit">🛍️<span class="counter" data-cart-count hidden>0</span></button>
+      <button class="sticky-whats">◎ Chamar no WhatsApp</button>
+    </div>
+
+    <div class="sheet-backdrop" data-close-sheet inert></div>
+    <aside class="sheet" id="cart-sheet" role="dialog" aria-modal="true" aria-label="Seu kit" inert></aside>
+    <aside class="sheet" id="product-sheet" role="dialog" aria-modal="true" aria-label="Cadastrar produto" inert></aside>
+    <aside class="sheet side-menu" id="menu-sheet" role="dialog" aria-modal="true" aria-label="Menu" inert>
+      <div class="menu-head"><b>Menu</b><button data-close-sheet aria-label="Fechar menu">✕</button></div>
+      <nav class="menu-list">
+        <button data-companion-nav="dashboard">📊 Meu painel</button>
+        <button data-toast="Meu perfil: disponível no site atual">👤 Meu perfil</button>
+        <button data-companion-nav="shop">🛍️ Minha loja <span class="new-pill">NOVO</span></button>
+        <button data-toast="Planos e assinaturas: disponível no site atual">⭐ Planos e assinaturas</button>
+        <button data-toast="Central de ajuda: disponível no site atual">❔ Central de ajuda</button>
+      </nav>
+    </aside>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+</div>
+</body>
+</html>
