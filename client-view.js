@@ -1,4 +1,4 @@
-// Visão do cliente: perfil público da acompanhante com a aba Loja e o kit.
+// Visão do cliente: perfil público da acompanhante com a aba Tools (loja dela) e o kit.
 import { $, $$, formatPrice, escapeHtml, openSheet, isSheetOpen } from './ui.js';
 import { visibleShopProducts, findProduct, placeOrder, ShopError } from './store.js';
 
@@ -47,7 +47,7 @@ export function createClientView(store) {
   const tabs = () => [
     { id: 'photos', label: 'Fotos e vídeos', count: 148 },
     { id: 'about', label: 'Sobre mim' },
-    { id: 'shop', label: 'Loja', count: shopProducts().length, isNew: true },
+    { id: 'shop', label: 'Tools', count: shopProducts().length, isNew: true },
     { id: 'reviews', label: 'Avaliações', count: 87 }
   ];
 
@@ -139,7 +139,7 @@ export function createClientView(store) {
       return;
     }
     if (!view.cart.length) {
-      sheet.innerHTML = `${cartHeader()}<p class="cart-empty">Seu kit está vazio.<br>Escolha produtos na aba Loja.</p>
+      sheet.innerHTML = `${cartHeader()}<p class="cart-empty">Seu kit está vazio.<br>Escolha produtos na aba Tools.</p>
         <button class="pay-btn" data-close-sheet data-goto-shop>Ver loja</button>`;
       return;
     }

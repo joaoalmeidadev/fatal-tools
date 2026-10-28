@@ -88,6 +88,16 @@ store.subscribe(() => {
   companion.render();
 });
 
+// O celular mantém 390×844 de layout e só encolhe na tela (transform), como um iPhone de verdade.
+const DEVICE_SIZE = { height: 868, topSpace: 64, bottomSpace: 16 };
+
+function fitDevice() {
+  const available = window.innerHeight - DEVICE_SIZE.topSpace - DEVICE_SIZE.bottomSpace;
+  document.documentElement.style.setProperty('--device-scale', String(Math.min(1, available / DEVICE_SIZE.height)));
+}
+
+window.addEventListener('resize', fitDevice);
+fitDevice();
 setViewMode(readPreference(CHOICES.mode));
 setRole(readPreference(CHOICES.role));
 client.render();

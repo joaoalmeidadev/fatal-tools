@@ -30,8 +30,15 @@ svg.icon { width: 1em; height: 1em; flex-shrink: 0; }
 /* ---------- Shell: moldura de celular x página desktop ---------- */
 .device { position: relative; background: var(--fm-page); overflow: hidden; }
 .viewport { position: relative; height: 100%; overflow-y: auto; overflow-x: hidden; }
-.view-mobile .stage { height: 100%; display: grid; place-items: center; padding: 64px 16px 16px; }
-.view-mobile .device { width: 390px; height: min(844px, calc(100vh - 80px)); border-radius: 44px; border: 10px solid #121214; box-shadow: 0 30px 70px rgba(0,0,0,.25); }
+/* iPhone de 390×844 pt; main.js ajusta --device-scale para caber na tela sem mudar o layout */
+.view-mobile .stage { height: 100%; display: flex; justify-content: center; align-items: flex-start; padding-top: 64px; }
+.view-mobile .device { flex-shrink: 0; width: 414px; height: 868px; border-radius: 60px; border: 12px solid #121214; box-shadow: 0 0 0 2px #3a3a40, 0 30px 70px rgba(0,0,0,.25); transform: scale(var(--device-scale, 1)); transform-origin: top center; display: flex; flex-direction: column; }
+.view-mobile .device .viewport { height: auto; flex: 1; min-height: 0; }
+.status-bar { height: 47px; flex-shrink: 0; background: var(--fm-card); display: flex; align-items: center; justify-content: space-between; padding: 6px 30px 0 34px; font-size: 15px; font-weight: 600; position: relative; z-index: 25; }
+.status-bar .island { position: absolute; left: 50%; top: 11px; width: 120px; height: 34px; border-radius: 20px; background: #121214; transform: translateX(-50%); }
+.status-bar .indicators { font-size: 12px; letter-spacing: 2px; }
+.home-indicator { position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; border-radius: 3px; background: #121214; transform: translateX(-50%); z-index: 45; pointer-events: none; }
+.view-desktop .status-bar, .view-desktop .home-indicator { display: none; }
 .view-desktop .stage { height: 100%; }
 .view-desktop .device { width: 100%; height: 100%; }
 .view-mobile .only-desktop, .view-desktop .only-mobile { display: none; }
@@ -128,7 +135,8 @@ a { color: inherit; text-decoration: none; }
 .cta.fans { background: var(--fm-fans); color: #fff; }
 .cta.fans b { font-weight: 700; }
 .cta.fans .fans-logo { background: #fff; color: var(--fm-fans); border-radius: 4px; width: 22px; height: 22px; display: grid; place-items: center; font-size: 14px; }
-.cta.shop { border: 2px solid var(--fm-red); color: var(--fm-red); font-weight: 600; position: relative; }
+.cta.shop { border: 2px solid var(--fm-red); color: var(--fm-red-dark); position: relative; }
+.cta.shop b { font-weight: 700; }
 .cta.shop .new-pill { background: var(--fm-red); color: #fff; font-size: 10px; font-weight: 700; border-radius: 999px; padding: 2px 8px; }
 .cta.whats { background: var(--fm-whats); color: #fff; font-weight: 600; font-size: 18px; }
 
@@ -160,7 +168,7 @@ a { color: inherit; text-decoration: none; }
 .gray-card h3 { display: flex; justify-content: space-between; align-items: center; font-size: 16px; font-weight: 500; margin: 0 0 12px; }
 .gray-card p { margin: 0; font-size: 15px; line-height: 1.6; }
 .pills { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.pill { border: 1px solid var(--fm-red); color: var(--fm-red); border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 500; background: transparent; }
+.pill { border: 1px solid var(--fm-red); color: var(--fm-red); border-radius: 999px; padding: 7px 16px; font-size: 14px; font-weight: 500; background: transparent; }
 .pill[aria-pressed="true"] { background: var(--fm-red); color: #fff; }
 .pills .more { color: var(--fm-muted); font-size: 13px; }
 
@@ -172,30 +180,31 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Loja ---------- */
 .shop-intro { display: flex; gap: 14px; align-items: center; }
 .shop-intro .avatar-sm { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--fm-red); background: linear-gradient(160deg, #caa1a8, #5f3a4b); flex-shrink: 0; }
-.shop-intro p { font-size: 14px; }
-.shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
-.view-desktop .shop-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.shop-intro { margin-bottom: 18px; }
+.shop-intro p { font-size: 15px; line-height: 1.55; }
+.shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 20px; }
+.view-desktop .shop-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .product { border: 1px solid #e3e5e6; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: var(--fm-card); }
-.product .thumb { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 40px; position: relative; }
-.product .pick { position: absolute; top: 8px; left: 8px; background: var(--fm-red); color: #fff; font-size: 10px; font-weight: 700; border-radius: 999px; padding: 3px 8px; }
-.product .body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-.product h4 { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.35; color: var(--fm-title); }
-.product .price { font-size: 16px; font-weight: 700; }
-.meet-tag { align-self: flex-start; background: var(--fm-meet); color: var(--fm-meet-ink); font-size: 11px; font-weight: 600; border-radius: 6px; padding: 3px 7px; }
-.seller { font-size: 11px; color: var(--fm-muted); }
-.add-btn { margin-top: auto; height: 36px; border-radius: 8px; border: 1px solid var(--fm-red); color: var(--fm-red); font-size: 13px; font-weight: 600; }
+.product .thumb { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 46px; position: relative; }
+.product .pick { position: absolute; top: 8px; left: 8px; background: var(--fm-red); color: #fff; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 3px 8px; }
+.product .body { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.product h4 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--fm-title); }
+.product .price { font-size: 19px; font-weight: 700; }
+.meet-tag { align-self: flex-start; background: var(--fm-meet); color: var(--fm-meet-ink); font-size: 12px; font-weight: 600; border-radius: 6px; padding: 4px 8px; }
+.seller { font-size: 12px; color: var(--fm-muted); }
+.add-btn { margin-top: auto; height: 42px; border-radius: 8px; border: 1px solid var(--fm-red); color: var(--fm-red); font-size: 14px; font-weight: 600; }
 .add-btn.added { background: var(--fm-red); color: #fff; }
-.shop-trust { margin-top: 20px; display: grid; gap: 8px; font-size: 13px; color: var(--fm-ink); }
+.shop-trust { margin-top: 28px; display: grid; gap: 10px; font-size: 14px; line-height: 1.5; color: var(--fm-ink); }
 .view-desktop .shop-trust { grid-template-columns: repeat(3, 1fr); }
-.shop-trust div { background: var(--fm-page); border-radius: 10px; padding: 10px 12px; }
+.shop-trust div { background: var(--fm-page); border-radius: 10px; padding: 12px 14px; }
 
 /* ---------- Barra fixa (mobile) ---------- */
-.sticky-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 15; background: var(--fm-card); box-shadow: 0 -2px 8px rgba(0,0,0,.08); padding: 10px 12px 14px; display: flex; align-items: center; gap: 8px; }
+.sticky-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 15; background: var(--fm-card); box-shadow: 0 -2px 8px rgba(0,0,0,.08); padding: 10px 14px 28px; display: flex; align-items: center; gap: 8px; }
 .sticky-price { font-size: 12px; line-height: 1.25; flex-shrink: 0; }
 .sticky-price b { display: block; font-size: 19px; text-decoration: underline; }
 .sticky-kit { position: relative; width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--fm-red); color: var(--fm-red); font-size: 20px; display: grid; place-items: center; flex-shrink: 0; }
 .sticky-whats { flex: 1; height: 48px; border-radius: 8px; background: var(--fm-whats); color: #fff; font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; }
-.view-mobile #client-viewport { padding-bottom: 76px; }
+.view-mobile #client-viewport { padding-bottom: 90px; }
 
 /* ---------- Sheets: carrinho, cadastro e menu (sheet no mobile, drawer no desktop) ---------- */
 .sheet-backdrop { position: absolute; inset: 0; z-index: 30; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .2s; }
@@ -204,6 +213,7 @@ a { color: inherit; text-decoration: none; }
 .sheet.is-open { visibility: visible; transition: transform .25s ease; }
 .view-mobile .sheet { left: 0; right: 0; bottom: 0; max-height: 88%; border-radius: 20px 20px 0 0; transform: translateY(105%); }
 .view-desktop .sheet { top: 0; right: 0; bottom: 0; width: 420px; transform: translateX(105%); }
+.view-mobile .sheet { padding-bottom: 34px; }
 .view-mobile .sheet.side-menu, .view-desktop .sheet.side-menu { top: 0; bottom: 0; left: 0; right: auto; width: 290px; max-height: none; border-radius: 0; transform: translateX(-105%); }
 .sheet.is-open, .view-mobile .sheet.side-menu.is-open, .view-desktop .sheet.side-menu.is-open { transform: none; }
 .sheet h3 { display: flex; justify-content: space-between; align-items: center; margin: 0 0 14px; font-size: 18px; }
@@ -261,9 +271,9 @@ a { color: inherit; text-decoration: none; }
 .product-row { display: flex; align-items: center; gap: 12px; border-top: 1px solid #e3e5e6; padding: 12px 0; }
 .product-row:first-of-type { border-top: 0; padding-top: 0; }
 .thumb-sm { width: 48px; height: 48px; border-radius: 10px; display: grid; place-items: center; font-size: 24px; flex-shrink: 0; }
-.product-info { flex: 1; min-width: 0; font-size: 13px; }
-.product-info b { display: block; font-size: 13px; line-height: 1.35; }
-.product-info small { color: var(--fm-muted); }
+.product-info { flex: 1; min-width: 0; font-size: 14px; line-height: 1.45; }
+.product-info b { display: block; font-size: 15px; line-height: 1.4; margin-bottom: 2px; }
+.product-info small { color: var(--fm-muted); font-size: 13px; }
 .product-info .sold-out { color: #b3261e; font-weight: 600; }
 .product-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 .stepper { display: flex; align-items: center; border: 1px solid var(--fm-line); border-radius: 8px; }
