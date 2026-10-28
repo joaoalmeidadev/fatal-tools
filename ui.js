@@ -21,7 +21,8 @@ export function openSheet(sheetId) {
   sheet.classList.add('is-open');
   sheet.inert = false;
   $('.sheet-backdrop').inert = false;
-  (sheet.querySelector('[data-autofocus]') ?? sheet.querySelector('button, input'))?.focus();
+  // preventScroll: o #device tem overflow:hidden e o navegador o rolaria até o sheet ainda fora da tela.
+  (sheet.querySelector('[data-autofocus]') ?? sheet.querySelector('button, input'))?.focus({ preventScroll: true });
 }
 
 export function closeSheet() {
@@ -32,6 +33,7 @@ export function closeSheet() {
   sheet.inert = true;
   $('.sheet-backdrop').inert = true;
   $('#device').classList.remove('sheet-open');
+  $('#device').scrollTop = 0;
   openSheetId = null;
   return closedId;
 }

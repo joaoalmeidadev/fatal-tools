@@ -201,7 +201,7 @@ export function createCompanionView(store) {
   // ---------- Navegação ----------
   function navigate(screen) {
     view.screen = screen;
-    if (closeSheet() === MENU_SHEET) $('#menu-toggle').focus();
+    if (closeSheet() === MENU_SHEET) $('#menu-toggle').focus({ preventScroll: true });
     render();
     $('#companion-viewport').scrollTop = 0;
   }
