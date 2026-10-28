@@ -117,6 +117,9 @@ export function createClientView(store) {
       badge.hidden = view.cart.length === 0;
       badge.textContent = view.cart.length;
     });
+    const kitButton = $('#kit-fab');
+    kitButton.hidden = view.cart.length === 0;
+    kitButton.textContent = `🛍️ Ver kit (${view.cart.length}) · ${formatPrice(cartTotal())}`;
   }
 
   const cartHeader = () => '<h3>Seu kit <button data-close-sheet aria-label="Fechar">✕</button></h3>';
